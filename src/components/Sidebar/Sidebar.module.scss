@@ -1,6 +1,6 @@
 .section {
   display: inline-flex;
-  height: calc(100vh - 2.5rem);
+  min-height: calc(100vh - 2.5rem);
 }
 
 .icons {
@@ -12,8 +12,6 @@
 
 .icon {
   color: #656972;
-  padding: 12px 10px;
-  cursor: pointer;
   border-left: 2px solid transparent;
 
   &:hover {
@@ -23,6 +21,11 @@
   &.active {
     color: #fff;
     border-color: #fff;
+  }
+
+  a {
+    display: block;
+    padding: 12px 10px;
   }
 }
 
@@ -90,10 +93,11 @@
       
       > a {
         display: flex;
+        align-items: center;
         padding: 5px 30px;
       }
 
-      &:hover {
+      &:hover, &.active {
         background-color: var(--sidebar-bg-hover);
       }
     }

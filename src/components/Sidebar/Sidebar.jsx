@@ -17,7 +17,7 @@ import { ReactComponent as FolderGlobalOpenIcon } from '../../icons/folder-globa
 import { ReactComponent as FolderimagesIcon } from '../../icons/folder-images.svg';
 import { ReactComponent as FolderimagesOpenIcon } from '../../icons/folder-images-open.svg';
 
-import { BrowserRouter, Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 function Sidebar() {
   const [isActive, setIsActive] = useState("files");
@@ -29,28 +29,24 @@ function Sidebar() {
   const handleExpIn = (icon) => {
     setIsActiveExp(icon);
   };
-  const handleExpOut = (icon) => {
-    setIsActiveExp(icon);
-  };
-
-  useEffect(() => {
-
-  }, []);
+  
+  const location = useLocation();
+  
   return (
     <aside className={styles.section}>
       <div className={styles.icons_container}>
         <ul className={styles.icons_wrapper}>
-          <li className={`${styles.icon} ${isActive == "files" ? styles.active : ""}`} >
-            <FilesIcon className="files" />
+          <li className={`${styles.icon} ${isActive == "files" ? styles.active : ""}`} onClick={() => handleIcon("files")}>
+            <Link to="/"><FilesIcon className="files" /></Link>
           </li>
           <li className={`${styles.icon} ${isActive == "search" ? styles.active : ""}`} onClick={() => handleIcon("search")}>
-            <SearchIcon className="search" />
+            <Link to="/portfolio"><SearchIcon className="search" /></Link>
           </li>
           <li className={`${styles.icon} ${isActive == "source_control" ? styles.active : ""}`} onClick={() => handleIcon("source_control")}>
-            <SourceControlIcon className="source_control" />
+            <Link to="#"><SourceControlIcon className="source_control" /></Link>
           </li>
           <li className={`${styles.icon} ${isActive == "extensions" ? styles.active : ""}`} onClick={() => handleIcon("extensions")}>
-            <ExtensionsIcon className="extensions" />
+            <Link to="#"><ExtensionsIcon className="extensions" /></Link>
           </li>
         </ul>
       </div>
@@ -92,33 +88,57 @@ function Sidebar() {
                       <Link to="/profile">
                         <ChevronRightIcon className="chevron_right" />
                         <div className="mr-5">
-                          <span>KANG_JI_WOON.html</span>
+                          <span>Jiwoon.html</span>
                         </div>
                       </Link>
                     </li>
                   </ul>
                 </li>
-                <li className={`${styles.explorer_list_item} ${isActiveExp == "portfolio" ? styles.active : ""}`} onClick={() => isActiveExp == "portfolio" ? handleExpIn() : handleExpIn("portfolio")}>
-                  {isActiveExp == "portfolio" ? (<ChevronDownIcon className="chevron_down" />) : (
-                    <ChevronRightIcon className="chevron_right" />
-                  )}
-                  <div className="mr-5">
-                    {isActiveExp == "portfolio" ? (<FolderControllerOpenIcon className="folder-controller" />) : (
-                      <FolderControllerIcon className="folder-controller" />
+                <li className={`${isActiveExp == "portfolio" ? styles.active : ""}`}>
+                  <div className={`${styles.explorer_list_item}`} onClick={(e) => {isActiveExp == "portfolio" ? handleExpIn() : handleExpIn("portfolio");}}>
+                    {isActiveExp == "portfolio" ? (<ChevronDownIcon className="chevron_down" />) : (
+                      <ChevronRightIcon className="chevron_right" />
                     )}
+                    <div className="mr-5">
+                      {isActiveExp == "portfolio" ? (<FolderControllerOpenIcon className="folder-controller" />) : (
+                        <FolderControllerIcon className="folder-controller" />
+                      )}
+                    </div>
+                    <span>portfolio</span>
                   </div>
-                  <span>portfolio</span>
+                  <ul className={styles.explorer_2depth_list}>
+                    <li className={`${styles.explorer_2depth_item} ${location.pathname == "/portfolio" ? styles.active : ""}`}>
+                      <Link to="/portfolio">
+                        <ChevronRightIcon className="chevron_right" />
+                        <div className="mr-5">
+                          <span>portfolio.html</span>
+                        </div>
+                      </Link>
+                    </li>
+                  </ul>
                 </li>
-                <li className={`${styles.explorer_list_item} ${styles.explorer_top} ${isActiveExp == "career" ? styles.active : ""}`} onClick={() => isActiveExp == "career" ? handleExpIn() : handleExpIn("career")}>
-                  {isActiveExp == "career" ? (<ChevronDownIcon className="chevron_down" />) : (
-                    <ChevronRightIcon className="chevron_right" />
-                  )}
-                  <div className="mr-5">
-                    {isActiveExp == "career" ? (<FolderGlobalOpenIcon className="folder-global" />) : (
-                      <FolderGlobalIcon className="folder-global" />
+                <li className={`${isActiveExp == "career" ? styles.active : ""}`}>
+                  <div className={`${styles.explorer_list_item}`} onClick={(e) => {isActiveExp == "career" ? handleExpIn() : handleExpIn("career");}}>
+                    {isActiveExp == "career" ? (<ChevronDownIcon className="chevron_down" />) : (
+                      <ChevronRightIcon className="chevron_right" />
                     )}
+                    <div className="mr-5">
+                      {isActiveExp == "career" ? (<FolderGlobalOpenIcon className="folder-controller" />) : (
+                        <FolderGlobalIcon className="folder-controller" />
+                      )}
+                    </div>
+                    <span>resume</span>
                   </div>
-                  <span>career</span>
+                  <ul className={styles.explorer_2depth_list}>
+                    <li className={`${styles.explorer_2depth_item} ${location.pathname == "/resume" ? styles.active : ""}`}>
+                      <Link to="/resume">
+                        <ChevronRightIcon className="chevron_right" />
+                        <div className="mr-5">
+                          <span>resume.php</span>
+                        </div>
+                      </Link>
+                    </li>
+                  </ul>
                 </li>
                 <li className={`${styles.explorer_list_item} ${styles.explorer_top} ${isActiveExp == "src" ? styles.active : ""}`} onClick={() => isActiveExp == "src" ? handleExpIn() : handleExpIn("src")}>
                   {isActiveExp == "src" ? (<ChevronDownIcon className="chevron_down" />) : (
