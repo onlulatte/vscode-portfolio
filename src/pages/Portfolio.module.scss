@@ -1,0 +1,141 @@
+.section {
+  width: calc(100% - 280px);
+  padding: 10px;
+  color: #abb2bf;
+  container-type: inline-size;
+  container-name: sidebar;
+
+  @container sidebar (max-width: 900px) {
+    .card_text {
+      height: 6.875rem;
+    }
+  }
+  @container sidebar (max-width: 700px) {
+    .card_text {
+      height: 8.125rem;
+    }
+  }
+  @container sidebar (max-width: 500px) {
+    .col-6 {
+      width: 100%;
+    }
+  }
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  transition: all 0.5s ease-in-out;
+  width: 100%;
+  margin: auto;
+
+  &.active {
+    // width: 960px;
+
+    // .col-6 {
+    //   &:not(.active) {
+    //     opacity: 0;
+    //     width: 0;
+    //     height: 0;
+    //   }
+
+    //   &.active {
+    //     width: 100%;
+    //     padding: 0;
+
+    //     .card {
+    //       border-radius: 0;
+    //     }
+    //   }
+    // }
+  }
+
+}
+
+.col-6 {
+  width: min(29.375rem, calc(50% - 1.25rem));
+  padding: .625rem;
+  transition: all 0.5s ease-in-out;
+
+  &:not(.active) {
+    &:hover {
+      .card_head_img {
+        transform: scale(1.1);
+      }
+      ~.highlight {
+        opacity: 0.1;
+      }
+    }
+  }
+}
+
+.title {
+  font-size: 5rem;
+  font-weight: 700;
+}
+
+.card {
+  position: relative;
+  height: 100%;
+  border-radius: 5px;
+  background-color: var(--sidebar-bg);
+  overflow: hidden;
+
+  &_head {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+
+  
+    &_img {
+      transition: transform .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+  }
+
+  &_body {
+    display: flex;
+    flex-direction: column;
+    padding: .9375rem .625rem;
+  }
+
+  &_title {
+    font-size: 1.375rem;
+    font-weight: 500;
+    margin-bottom: .625rem;
+  }
+
+  &_text {
+    height: 4.75rem;
+  }
+}
+
+.label {
+  margin-top: .625rem;
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+
+  &_item {
+    display: inline-block;
+    margin-top: .625rem;
+    margin-right: .625rem;
+    padding: .25rem .4rem;
+    font-weight: 700;
+    text-align: center;
+    border-radius: .375rem;
+    background-color: var(--sidebar-bg-hover);
+    cursor: default;
+  }
+}
+
+.highlight {
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: inherit;
+  opacity: 0;
+  background-color: currentcolor;
+  transition: opacity .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
